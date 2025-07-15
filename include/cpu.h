@@ -4,7 +4,7 @@
 
 typedef struct cpu
 {
-	unsigned char opcode;
+	unsigned short opcode;
 
 	//Memory definitiopn of 4096 bits
 	unsigned char memory[4096];
