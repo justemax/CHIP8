@@ -224,5 +224,6 @@ void cycle_emulation(cpu* proc)
 	}
 	
 	//Update
+	proc->program_counter += 2;
 
 }
