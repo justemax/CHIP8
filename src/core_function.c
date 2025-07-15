@@ -77,9 +77,151 @@ void cycle_emulation(cpu* proc)
 	//Fetch OP Code
 	
 	proc->opcode = proc->memory[proc->program_counter] << 8 | proc->memory[proc->program_counter + 1];
+
+	printf("%x \n", proc->opcode);
 	//Decode
-	
 	//Execute
+	switch(proc->opcode & 0xF000)
+	{
+		//Manage all 0x0XXX cases
+		case 0x0000:
+			switch(proc->opcode & 0x00FF)
+			{
+				case 0x00E0: //Clear screen
+					break;
+				case 0x00EE: //Return from subroutine
+					break;
+				default:
+					printf("UNKNOWN 0x0XXX OPCODE: %x", proc->opcode);
+			}
+
+		case 0x1000: //jump to addr
+			break;
+
+		case 0x2000: //call subroutine
+			break;
+	
+		case 0x3000:
+			break;
+
+		case 0x4000:
+			break;
+
+		case 0x5000:
+			break;
+
+		case 0x6000:
+			break;
+
+		case 0x7000:
+			break;
+
+		case 0x8000:
+			switch(proc->opcode & 0x000F)
+			{
+				case 0x001:
+					break;
+
+				case 0x002:
+					break;
+
+				case 0x003:
+					break;
+
+				case 0x004:
+					break;
+
+				case 0x005:
+					break;
+
+				case 0x006:
+					break;
+
+				case 0x007:
+					break;
+
+				case 0x00E:
+					break;
+
+				default:
+					printf("UNKNOWN INSTRUCTION 0x8XXX: %x\n", proc->opcode);
+			}
+
+		case 0x9000:
+			break;
+
+		case 0xA000:
+			break;
+
+		case 0xB000:
+			break;
+
+		case 0xC000:
+			break;
+
+		case 0xD000:
+			break;
+
+		case 0xE000:
+			switch(proc->opcode & 0x00FF)
+			{
+				case 0x009E:
+					break;
+
+				case 0x00A1:
+					break;
+
+				default:
+					printf("UNKNOWN INSTRUCTION 0x9XXX: %x\n", proc->opcode);
+			}
+
+		case 0xF000:
+			switch(proc->opcode & 0x00FF)
+			{
+				case 0x0007:
+					break;
+
+				case 0x000A:
+					break;
+
+
+				case 0x0015:
+					break;
+
+
+				case 0x0018:
+					break;
+
+
+				case 0x001E:
+					break;
+
+
+				case 0x0029:
+					break;
+
+
+				case 0x0033:
+					break;
+
+
+				case 0x0055:
+					break;
+
+
+				case 0x0065:
+					break;
+
+				default:
+					printf("UNKNOWN INSTRUCTION 0xFXXX: %x\n", proc->opcode);
+
+			}
+
+		default:
+			printf("UNKNOWN INSTRUCTION : %x\n", proc->opcode);
+			break;
+
+	}
 	
 	//Update
 
