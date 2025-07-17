@@ -27,6 +27,9 @@ void op_6000(cpu* proc);
 void op_7000(cpu* proc);
 
 //0x8XX
+
+void op_8000(cpu* proc);
+
 void op_8001(cpu* proc);
 
 void op_8002(cpu* proc);
