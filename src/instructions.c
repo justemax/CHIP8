@@ -153,14 +153,84 @@ void op_8003(cpu* proc)
 
 }
 
-void op_8004(cpu* proc);
+/*
+ * Vx = Vx + Vy
+ */
+void op_8004(cpu* proc)
+{
+	char register_number_x = (proc->opcode >> 8) & 0xF;
+	char register_number_y = (proc->opcode >> 4) & 0xF;
 
-void op_8005(cpu* proc);
+	proc->V[register_number_x] = proc->V[register_number_x] + proc->V[register_number_y];
 
-void op_8006(cpu* proc);
+	if((proc->V[register_number_x] + proc->V[register_number_y]) > 255)
+	{
+		proc->V[15] = 1;
+	}
 
-void op_8007(cpu* proc);
 
-void op_800e(cpu* proc);
+}
+
+/*
+ * Vx = Vx - Vy
+ */
+void op_8005(cpu* proc)
+{
+	char register_number_x = (proc->opcode >> 8) & 0xF;
+	char register_number_y = (proc->opcode >> 4) & 0xF;
+
+	proc->V[register_number_x] = proc->V[register_number_x] - proc->V[register_number_y];
+
+	if(proc->V[register_number_x] >  proc->V[register_number_y])
+	{
+		proc->V[15] = 1;
+	}
+}
+
+
+/*
+ * SHR Vx 
+ */
+void op_8006(cpu* proc)
+{
+	char register_number_x = (proc->opcode >> 8) & 0xF;
+
+	if((proc->V[register_number_x] & 0x1) == 1)
+	{
+		proc->V[15] = 1;
+	}
+	proc->V[register_number_x] = proc->V[register_number_x] >> 1;
+}
+
+/*
+ * Vx = Vy - Vx
+ */
+void op_8007(cpu* proc)
+{
+	char register_number_x = (proc->opcode >> 8) & 0xF;
+	char register_number_y = (proc->opcode >> 4) & 0xF;
+
+	proc->V[register_number_x] = proc->V[register_number_y] - proc->V[register_number_x];
+
+	if(proc->V[register_number_x] <  proc->V[register_number_y])
+	{
+		proc->V[15] = 1;
+	}
+}
+
+/*
+ * SHL Vx
+ */
+void op_800e(cpu* proc)
+{
+	char register_number_x = (proc->opcode >> 8) & 0xF;
+
+	if((proc->V[register_number_x] & 0x80) == 1)
+	{
+		proc->V[15] = 1;
+	}
+	proc->V[register_number_x] = proc->V[register_number_x] << 1;
+
+}
 
 
