@@ -234,3 +234,52 @@ void op_800e(cpu* proc)
 }
 
 
+/*
+ * if Vx != Vy skip next instruction
+ */
+void op_9000(cpu* proc)
+{
+
+	char register_number_x = (proc->opcode >> 8) & 0xF;
+	char register_number_y = (proc->opcode >> 4) & 0xF;
+
+	if(proc->V[register_number_x] != proc->V[register_number_y])
+	{
+		proc->program_counter += 2;
+	}
+
+}
+
+/*
+ * Set I register ton nnn
+ */
+void op_a000(cpu* proc)
+{
+	proc->I = proc->opcode & 0x0FFF; 
+}
+
+/*
+ * Jump to nnn + V[0]
+ */
+void op_b000(cpu* proc)
+{
+	proc->program_counter = (proc->opcode & 0x0FFF) + proc->V[0];
+}
+
+/*
+ * Set Vx = Rand AND nn
+ */
+void op_c000(cpu* proc)
+{
+
+	char register_number_x = (proc->opcode >> 8) & 0xF;
+}
+
+//
+void op_d000(cpu* proc);
+
+//OxEXX
+void op_e09e(cpu* proc);
+
+void op_e0a1(cpu* proc);
+
