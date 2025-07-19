@@ -27,8 +27,10 @@ int main(int argc, char* argv[])
 
 	load_program(proc, file_path);
 
-	cycle_emulation(proc);
-
+	while(1)
+	{
+		cycle_emulation(proc);
+	}
 	free(file_path);
 	free(proc);
 
